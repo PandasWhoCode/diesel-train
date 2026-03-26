@@ -1,0 +1,28 @@
+version: '3'
+
+tasks:
+  build:
+    desc: Build the dl binary
+    cmds:
+      - go build -ldflags="-s -w" -trimpath -o dl .
+
+  run:
+    desc: Run dl
+    cmds:
+      - go run .
+
+  tidy:
+    desc: Tidy Go modules
+    cmds:
+      - go mod tidy
+
+  docker:build:
+    desc: Build the production distroless Docker image
+    cmds:
+      - docker build -t dl .
+
+  clean:
+    desc: Remove built artifacts and cached binaries
+    cmds:
+      - rm -f dl
+      - go clean -cache
