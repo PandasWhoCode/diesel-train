@@ -1,6 +1,6 @@
 module github.com/pandaswhocode/diesel
 
-go 1.22.0
+go 1.25.0
 
 require golang.org/x/term v0.27.0
 

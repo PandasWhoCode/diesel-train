@@ -1,0 +1,58 @@
+# SPDX-License-Identifier: Apache-2.0
+name: '300: [FLOW] PR Formatting Checks'
+on:
+  pull_request_target:
+    types:
+      - assigned
+      - unassigned
+      - labeled
+      - unlabeled
+      - opened
+      - reopened
+      - edited
+      - converted_to_draft
+      - ready_for_review
+      - review_requested
+      - review_request_removed
+      - locked
+      - unlocked
+      - synchronize
+
+defaults:
+  run:
+    shell: bash
+
+permissions:
+  contents: read
+  statuses: write
+
+jobs:
+  title-check:
+    name: Title Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@e3f713f2d8f53843e71c69a996d56f51aa9adfb9 # v2.14.1
+        with:
+          egress-policy: audit
+
+      - name: Check PR Title
+        uses: aslafy-z/conventional-pr-title-action@a0b851005a0f82ac983a56ead5a8111c0d8e044a # v3.2.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  assignee-check:
+    name: Assignee Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@e3f713f2d8f53843e71c69a996d56f51aa9adfb9 # v2.14.1
+        with:
+          egress-policy: audit
+
+      - name: Check Assignee
+        if: ${{ github.event.pull_request.assignees == null || github.event.pull_request.assignees[0] == null }}
+        run: |
+          echo "Assignee is not set. Failing the workflow."
+          exit 1
