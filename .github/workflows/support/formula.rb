@@ -12,6 +12,6 @@ class Dl < Formula
   end
 
   test do
-    assert_match "dl", shell_output("#{bin}/dl --help 2>&1", 2)
+    assert_match "dl", shell_output("#{bin}/dl --help 2>&1", 0)
   end
 end
