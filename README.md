@@ -48,3 +48,8 @@ docker run -it --rm dl
 ## License
 
 Apache 2.0 — see [LICENSE](LICENSE).
+
+## Notes
+
+Enjoy!
+
