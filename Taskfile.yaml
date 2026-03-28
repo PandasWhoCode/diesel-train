@@ -16,6 +16,11 @@ tasks:
     cmds:
       - go mod tidy
 
+  fmt:
+    desc: Go format the code
+    cmds:
+      - gofmt -w .
+
   docker:build:
     desc: Build the production distroless Docker image
     cmds:
