@@ -62,7 +62,6 @@ var wheelFrames = [4]string{
 	`          (O-)(O-)         (O-)(O-)         (O-)(O-)              `,
 }
 
-
 func csi(row, col int) string {
 	return fmt.Sprintf("\033[%d;%dH", row, col)
 }
